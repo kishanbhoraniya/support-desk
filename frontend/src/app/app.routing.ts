@@ -4,6 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
 
+/* Services
+=========================================== */
+import { LoginGuard } from './shared/login-guard.service';
+import { AuthGuard } from './shared/auth-guard.service';
+
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
@@ -14,6 +19,7 @@ export const routes: Routes = [
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: '404',
@@ -31,6 +37,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
+    canActivate: [LoginGuard],
     component: LoginComponent,
     data: {
       title: 'Login Page'
@@ -38,6 +45,7 @@ export const routes: Routes = [
   },
   {
     path: 'register',
+    canActivate: [LoginGuard],
     component: RegisterComponent,
     data: {
       title: 'Register Page'
@@ -46,6 +54,7 @@ export const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
+    canActivate: [AuthGuard],
     data: {
       title: 'Home'
     },

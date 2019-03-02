@@ -2,6 +2,7 @@ package com.finalhints.handler;
 
 import com.finalhints.request.user.CreateUserRq;
 import com.finalhints.request.user.EditUserRq;
+import com.finalhints.request.user.LoginReq;
 import com.finalhints.response.CreatedRes;
 import com.finalhints.response.OperationCompletionRes;
 import com.finalhints.response.UserRes;
@@ -16,4 +17,6 @@ public interface IUserRequestHandler {
 	UserRes get(int id);
 
 	OperationCompletionRes delete(int id);
+
+	UserRes login(LoginReq loginReq);
 }

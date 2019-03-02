@@ -16,6 +16,7 @@ import com.finalhints.reposioty.RoleRepository;
 import com.finalhints.reposioty.UserRepository;
 import com.finalhints.request.user.CreateUserRq;
 import com.finalhints.request.user.EditUserRq;
+import com.finalhints.request.user.LoginReq;
 import com.finalhints.response.CreatedRes;
 import com.finalhints.response.OperationCompletionRes;
 import com.finalhints.response.UserRes;
@@ -67,6 +68,16 @@ public class UserRequestHandler implements IUserRequestHandler {
 		Optional<User> user = userRepository.findById(id);
 		userRepository.delete(user.get());
 		return new OperationCompletionRes("User with ID = '" + id + "' successfully deleted.");
+	}
+
+	@Override
+	public UserRes login(LoginReq loginReq) {
+		Optional<User> user = userRepository.getUserByEmailAndPassword(loginReq.getEmail(), loginReq.getPassword());
+		if (user.isPresent()) {
+			return UserConverter.ENTITY_TO_RES.apply(user.get());
+		} else {
+			throw new RuntimeException("User not found");
+		}
 	}
 
 }

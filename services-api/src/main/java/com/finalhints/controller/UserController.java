@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.finalhints.handler.IUserRequestHandler;
 import com.finalhints.request.user.CreateUserRq;
 import com.finalhints.request.user.EditUserRq;
+import com.finalhints.request.user.LoginReq;
 import com.finalhints.response.CreatedRes;
 import com.finalhints.response.OperationCompletionRes;
 import com.finalhints.response.UserRes;
@@ -61,6 +62,13 @@ public class UserController {
 	@GetMapping
 	public Iterable<UserRes> getAllUser() {
 		return userRequestHandler.getAll();
+	}
+
+	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
+	@PostMapping("/auth")
+	public UserRes getUser(@RequestBody @Validated LoginReq loginReq) {
+		return userRequestHandler.login(loginReq);
 	}
 
 }
