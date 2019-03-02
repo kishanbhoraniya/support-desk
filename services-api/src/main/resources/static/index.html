@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>
+</title>
+</head>
+<body>
+
+<h2>The XMLHttpRequest Object</h2>
+
+<button type="button" onclick="loadDoc()">Request data</button>
+
+<p id="demo"></p>
+
+<script type="text/javascript">
+
+  function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  
+  var data ={
+	firstName:"abcd",
+	lastName:"cdef"
+  }
+  
+  xhttp.open("POST", "http://localhost:8080/employee", true);
+  xhttp.setRequestHeader("Content-Type","application/json")
+  xhttp.send(JSON.stringify(data));
+}
+
+</script>
+
+</body>
+</html>
