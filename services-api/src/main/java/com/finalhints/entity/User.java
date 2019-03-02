@@ -1,5 +1,6 @@
 package com.finalhints.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,7 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "user")
@@ -48,6 +53,14 @@ public class User {
 
 	@OneToMany(mappedBy = "createdBy")
 	private List<Project> createdProject;
+
+	@Column(name = "created", columnDefinition = "DATETIME")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date created;
+
+	@Column(name = "updated", columnDefinition = "DATETIME")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date updated;
 
 	public Role getRole() {
 		return role;
@@ -127,6 +140,32 @@ public class User {
 
 	public void setCreatedProject(List<Project> createdProject) {
 		this.createdProject = createdProject;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
+
+	@PrePersist
+	void createdAt() {
+		this.created = this.updated = new Date();
+	}
+
+	@PreUpdate
+	void updatedAt() {
+		this.updated = new Date();
 	}
 
 }

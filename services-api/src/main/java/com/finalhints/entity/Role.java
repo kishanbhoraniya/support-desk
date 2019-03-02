@@ -8,18 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="role")
+@Table(name = "role")
 public class Role {
-	
-	@Column(name="id")
+
+	@Column(name = "id")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="name")
+
+	@Column(name = "name")
 	private String name;
 
-	
 	public String getName() {
 		return name;
 	}
@@ -27,7 +26,5 @@ public class Role {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
 
 }
