@@ -36,8 +36,13 @@ export const navItems: NavData[] = [
     icon: 'icon-speedometer',
   },
   {
+    name: 'Projects',
+    url: '/project',
+    icon: 'icon-puzzle'
+  },
+  {
     name: 'Users',
-    url: '/users',
-    icon: 'icon-user'
+    url: '/user',
+    icon: 'icon-people'
   }
 ];

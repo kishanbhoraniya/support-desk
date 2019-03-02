@@ -83,7 +83,11 @@ export const routes: Routes = [
         loadChildren: './views/widgets/widgets.module#WidgetsModule'
       },
       {
-        path: 'users',
+        path: 'project',
+        loadChildren: './views/project/project.module#ProjectModule'
+      },
+      {
+        path: 'user',
         loadChildren: './views/users/user.module#UserModule'
       }
     ]
