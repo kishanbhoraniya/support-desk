@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CategoryService } from "../../../../services/category.services"
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
-import { ModalDirective } from 'ngx-bootstrap/modal';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { CategoryService } from "../../../../services/category.services";
+import { ActivatedRoute } from "@angular/router";
+import { Router } from "@angular/router";
+import { ModalDirective } from "ngx-bootstrap/modal";
+import { AppBreadcrumbService } from "../../../breadcrumb/breadcrumb.service";
 import {
   FormGroup,
   FormControl,
@@ -11,17 +12,21 @@ import {
 } from "@angular/forms";
 
 @Component({
-  templateUrl: 'project-detail-default.component.html'
+  templateUrl: "project-detail-default.component.html"
 })
 export class ProjectDetailDefaultComponent implements OnInit {
   createCategoryForm: FormGroup;
   projectId;
   categories = [];
 
-  @ViewChild('myModal')
+  @ViewChild("myModal")
   public myModal: ModalDirective;
 
-  constructor(private route: ActivatedRoute, private categoryService: CategoryService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private categoryService: CategoryService,
+    private breadcrumbService: AppBreadcrumbService
+  ) {}
   ngOnInit(): void {
     this.createCategoryForm = new FormGroup({
       categoryName: new FormControl(null, [Validators.required]),
@@ -31,22 +36,46 @@ export class ProjectDetailDefaultComponent implements OnInit {
   }
   getAllCategory() {
     this.route.params.subscribe(params => {
-      this.projectId = params['projectId'];
-      this.categoryService.getCategories(this.projectId).subscribe((response: any) => {
-        this.categories = response;
-      });
+      this.projectId = params["projectId"];
+      this.initBreadCrumb();
+      this.categoryService
+        .getCategories(this.projectId)
+        .subscribe((response: any) => {
+          this.categories = response;
+        });
     });
   }
   submit() {
     const category = {
       categoryName: this.createCategoryForm.get("categoryName").value.trim(),
       categoryDes: this.createCategoryForm.get("categoryDes").value.trim(),
-      projectId:parseInt(this.projectId,10)
+      projectId: parseInt(this.projectId, 10)
     };
     this.categoryService.createCategory(category).subscribe((response: any) => {
       this.myModal.hide();
       this.createCategoryForm.reset();
       this.getAllCategory();
     });
+  }
+
+  initBreadCrumb() {
+    const breadcrumbs = [
+      {
+        label: { title: "Home" },
+        url: "/"
+      },
+      {
+        label: { title: "Project" },
+        url: "/project"
+      },
+      {
+        label: { title: this.projectId },
+        url: "/project/" + this.projectId
+      }
+    ];
+    console.log(breadcrumbs);
+    this.breadcrumbService.breadCrumbsSubject.next(
+      Object.assign([], breadcrumbs)
+    );
   }
 }
