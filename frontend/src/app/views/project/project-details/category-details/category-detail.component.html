@@ -1,92 +1,99 @@
 <div class="animated fadeIn">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="d-inline">Fields</h5>
-                <button class="btn btn-primary" style="float: right" (click)="myModal.show()" data-toggle="modal">Add Field</button>
-              </div>
-              <div class="card-body">
-                <table class="table table-responsive-sm table-hover table-outline mb-0">
-                  <thead class="thead-light">
-                    <tr>
-                      <th>Id</th>
-                      <th>Field</th>
-                      <th>Field Type</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                      <tr *ngFor="let field of fields">
-                          <td>
-                            {{field.id}}
-                          </td>
-                          <td>
-                            {{field.name}}
-                          </td>
-                          <td>
-                            {{field.type}}
-                          </td>
-                        </tr>
-                    
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div><!--/.col-->
-        </div><!--/.row-->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="d-inline">Fields</h5>
+          <button class="btn btn-primary" style="float: right" (click)="myModal.show()" data-toggle="modal">Add Field</button>
+        </div>
+        <div class="card-body">
+          <table class="table table-responsive-sm table-hover table-outline mb-0">
+            <thead class="thead-light">
+              <tr>
+                <th>Id</th>
+                <th>Field</th>
+                <th>Field Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let field of fields">
+                <td>
+                  {{field.id}}
+                </td>
+                <td>
+                  {{field.name}}
+                </td>
+                <td>
+                  {{field.type}}
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Add New Field</h4>
-              <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
+</div>
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add New Field</h4>
+        <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="createFieldForm" (ngSubmit)="submit()">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="fieldName">Field Name</label>
+                <input type="text" formControlName="fieldName" class="form-control" id="fieldName" placeholder="Enter field name"
+                  autocomplete="off">
+              </div>
             </div>
-            <div class="modal-body">
-              <form [formGroup]="createFieldForm" (ngSubmit)="submit()">
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <label for="fieldName">Field Name</label>
-                    <input type="text" formControlName="fieldName" class="form-control" id="fieldName" placeholder="Enter field name"  autocomplete="off" >
-                  </div>
-                </div>
-              </div><!--/.row-->
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <label for="fieldDes">Field Description</label>
-                    <input type="text" formControlName="fieldDes" class="form-control" id="fieldDes" placeholder="Enter field Description"  autocomplete="off" >
-                  </div>
-                </div>
-              </div><!--/.row-->
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <label for="fieldType">Field Type</label>
-                    <input type="text" formControlName="fieldType" class="form-control" id="fieldType" placeholder="Enter field Description"  autocomplete="off" >
-                  </div>
-                </div>
-              </div><!--/.row-->
+          </div>
+          <!--/.row-->
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="fieldDes">Field Description</label>
+                <input type="text" formControlName="fieldDes" class="form-control" id="fieldDes" placeholder="Enter field Description"
+                  autocomplete="off">
+              </div>
+            </div>
+          </div>
+          <!--/.row-->
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="fieldType">Field Type</label>
+                <input type="text" formControlName="fieldType" class="form-control" id="fieldType" placeholder="Enter field Description"
+                  autocomplete="off">
+              </div>
+            </div>
+          </div>
+          <!--/.row-->
 
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group">
-                    <label for="fieldReq">Field Required</label>
-                    <input type="text" formControlName="fieldReq" class="form-control" id="fieldReq" placeholder="Enter field Description"  autocomplete="off" >
-                    
-                  </div>
-                </div>
-              </div><!--/.row-->
+          <div class="row">
+            <div class="col-sm-3">
+              <label for="fieldReq">Field Required</label>
+            </div>
+            <p-inputSwitch formControlName="fieldReq"></p-inputSwitch>
+          </div>
+          <!--/.row-->
 
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" (click)="myModal.hide()">Close</button>
-              <button type="button" class="btn btn-primary" (click)="submit()" >Create</button>
-            </div>
-          </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-      </div><!-- /.modal -->            
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="myModal.hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="submit()">Create</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

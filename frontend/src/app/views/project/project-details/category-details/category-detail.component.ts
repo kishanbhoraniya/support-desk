@@ -55,7 +55,7 @@ export class CategoryDetailComponent implements OnInit {
       fieldName: this.createFieldForm.get("fieldName").value.trim(),
       fieldDes: this.createFieldForm.get("fieldDes").value.trim(),
       type: this.createFieldForm.get("fieldType").value.trim(),
-      required: parseInt(this.createFieldForm.get("fieldReq").value.trim(), 10),
+      required: this.createFieldForm.get("fieldReq").value,
       categoryId: parseInt(this.categoryId, 10)
     };
     this.fieldService.createField(field).subscribe((response: any) => {
