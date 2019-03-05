@@ -12,6 +12,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 import { PERFECT_SCROLLBAR_CONFIG } from "ngx-perfect-scrollbar";
 import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
+import { ProjectService } from "./services/project.services"
+import { CategoryService } from "./services/category.services"
+import { FieldService } from "./services/field.services"
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -79,8 +82,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     },
     AuthGuard,
     LoginGuard,
-    AuthService
+    AuthService,
+    ProjectService,
+    CategoryService,
+    FieldService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
