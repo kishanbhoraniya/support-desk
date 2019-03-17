@@ -44,5 +44,10 @@ export const navItems: NavData[] = [
     name: 'Users',
     url: '/user',
     icon: 'icon-people'
+  },
+  {
+    name: 'Ticket',
+    url: '/ticket',
+    icon: 'icon-envelope'
   }
 ];

@@ -15,6 +15,8 @@ import { PerfectScrollbarConfigInterface } from "ngx-perfect-scrollbar";
 import { ProjectService } from "./services/project.services"
 import { CategoryService } from "./services/category.services"
 import { FieldService } from "./services/field.services"
+import { TicketService } from "./services/ticket.services"
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -65,7 +67,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,
@@ -85,7 +88,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     AuthService,
     ProjectService,
     CategoryService,
-    FieldService
+    FieldService,
+    TicketService
   ],
   bootstrap: [AppComponent]
 })

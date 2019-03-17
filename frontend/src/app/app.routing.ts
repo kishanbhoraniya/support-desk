@@ -98,6 +98,10 @@ export const routes: Routes = [
       {
         path: 'user',
         loadChildren: './views/users/user.module#UserModule'
+      },
+      {
+        path: 'ticket',
+        loadChildren: './views/ticket/ticket.module#TicketModule'
       }
     ]
   },

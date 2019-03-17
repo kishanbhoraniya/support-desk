@@ -1,0 +1,22 @@
+<form [formGroup]="createTicketForm" (ngSubmit)="submit()">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="projectName">Select Project</label><br>
+              <p-dropdown [options]="forprojects" formControlName="projectName" id="projectName" (onChange)="onProjectChange()"></p-dropdown>
+            </div>
+            <div class="form-group">
+                    <label for="categorytName">Select Category</label><br>
+                    <p-dropdown [options]="forcategory" formControlName="categoryName" id="categoryName"></p-dropdown>
+            </div>
+          </div>
+        </div><!--/.row-->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <label for="projectDes">Project Description</label>
+              <input type="text" formControlName="projectDes" class="form-control" id="projectDes" placeholder="Enter Project Description"  autocomplete="off" >
+            </div>
+          </div>
+        </div><!--/.row-->
+</form>
