@@ -7,7 +7,10 @@
           <button class="btn btn-primary" style="float: right" (click)="myModal.show()" data-toggle="modal">Add Project</button>
         </div>
         <div class="card-body">
-          <table class="table table-responsive-sm table-hover table-outline mb-0">
+          <p *ngIf="!projectList || projectList==0" style="text-align: center;">
+            You haven't created any project yet.
+          </p>
+          <table class="table table-responsive-sm table-hover table-outline mb-0" *ngIf="projectList && projectList.length>0">
             <thead class="thead-light">
               <tr>
                 <th>Id</th>
@@ -24,17 +27,20 @@
                   {{project.name}}
                 </td>
                 <td>
-                    {{project.adminName}}
+                  {{project.adminName}}
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-    </div><!--/.col-->
-  </div><!--/.row-->
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
 </div>
-<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -45,27 +51,31 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="createProjectForm" (ngSubmit)="submit()">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="form-group">
-              <label for="projectName">Project Name</label>
-              <input type="text" formControlName="projectName" class="form-control" id="projectName" placeholder="Enter project name"  autocomplete="off" >
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="projectName">Project Name</label>
+                <input type="text" formControlName="projectName" class="form-control" id="projectName" placeholder="Enter project name"
+                  autocomplete="off">
+              </div>
             </div>
           </div>
-        </div><!--/.row-->
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="form-group">
-              <label for="projectDes">Project Description</label>
-              <input type="text" formControlName="projectDes" class="form-control" id="projectDes" placeholder="Enter Project Description"  autocomplete="off" >
+          <!--/.row-->
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="projectDes">Project Description</label>
+                <input type="text" formControlName="projectDes" class="form-control" id="projectDes" placeholder="Enter Project Description"
+                  autocomplete="off">
+              </div>
             </div>
           </div>
-        </div><!--/.row-->
+          <!--/.row-->
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="myModal.hide()">Close</button>
-        <button type="button" class="btn btn-primary" (click)="submit()" >Create</button>
+        <button type="button" class="btn btn-primary" (click)="submit()">Create</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

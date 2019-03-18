@@ -9,6 +9,7 @@ public class TicketDesRes {
 	private Date updated;
 	private String assignee;
 	private String category;
+	private String project;
 	private String createdBy;
 	private String Status;
 	List<Fields> fields;
@@ -124,6 +125,14 @@ public class TicketDesRes {
 			this.value = value;
 		}
 
+	}
+
+	public String getProject() {
+		return project;
+	}
+
+	public void setProject(String project) {
+		this.project = project;
 	}
 
 }

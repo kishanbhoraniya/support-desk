@@ -3,12 +3,25 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="d-inline">Ticket Description</h4>
+          <h4 class="d-inline">Ticket : {{ ticketdes?.id }}</h4>
         </div>
         <div class="card-body">
-          <h5>Ticket Id : {{ ticketdes?.id }}</h5>
           <table class="table table-borderless">
             <tbody>
+              <tr>
+                <td>
+                  <b>Project</b>
+                </td>
+                <td>
+                  {{ticketdes?.project}}
+                </td>
+                <td>
+                  <b>Type</b>
+                </td>
+                <td>
+                  {{ticketdes?.category}}
+                </td>
+              </tr>
               <tr>
                 <td>
                   <b>Assigned To</b>
@@ -17,10 +30,10 @@
                   {{ticketdes?.assignee}}
                 </td>
                 <td>
-                  <b>Created In</b>
+                  <b>Status</b>
                 </td>
                 <td>
-                  {{ticketdes?.category}}
+                  {{ticketdes?.status}}
                 </td>
               </tr>
               <tr>
@@ -37,15 +50,6 @@
                   {{ticketdes?.updated}}
                 </td>
               </tr>
-              <tr>
-                  <td>
-                    <b>Status</b>
-                  </td>
-                  <td>
-                    {{ticketdes?.status}}
-                  </td>
-                  
-                </tr>
             </tbody>
           </table>
           <table class="table table-responsive-sm table-hover table-outline mb-0">

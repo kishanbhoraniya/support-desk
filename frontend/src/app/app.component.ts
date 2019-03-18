@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Router, NavigationEnd } from "@angular/router";
+import { MessageService } from "primeng/api";
 
 @Component({
-  // tslint:disable-next-line
-  selector: 'body',
-  template: '<router-outlet></router-outlet>'
+  selector: "body",
+  templateUrl: "app.component.html",
+  providers: [MessageService]
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private messageService: MessageService) {}
 
   ngOnInit() {
-    this.router.events.subscribe((evt) => {
+    this.router.events.subscribe(evt => {
       if (!(evt instanceof NavigationEnd)) {
         return;
       }

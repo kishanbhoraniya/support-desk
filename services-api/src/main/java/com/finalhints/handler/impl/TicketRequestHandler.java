@@ -119,9 +119,8 @@ public class TicketRequestHandler implements ITicketRequestHandler {
 		ticketDesRes
 				.setCreatedBy(ticket.getCreatedByUser().getFirstName() + " " + ticket.getCreatedByUser().getLastName());
 		ticketDesRes.setStatus(ticket.getStatus().getName());
-
+		ticketDesRes.setProject(ticket.getCategory().getProject().getName());
 		List<TicketDesRes.Fields> fieldsres = new ArrayList<>();
-
 		List<Field> fields = ticket.getCategory().getCategoryFields();
 
 		Iterator<Field> iterator = fields.iterator();
