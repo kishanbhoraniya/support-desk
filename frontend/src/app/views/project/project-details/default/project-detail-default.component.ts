@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { CategoryService } from "../../../../services/category.services";
+import { ProjectService } from "../../../../services/project.services";
 import { ActivatedRoute } from "@angular/router";
 import { Router } from "@angular/router";
 import { ModalDirective } from "ngx-bootstrap/modal";
@@ -18,6 +19,7 @@ export class ProjectDetailDefaultComponent implements OnInit {
   createCategoryForm: FormGroup;
   projectId;
   categories = [];
+  users = [];
 
   @ViewChild("myModal")
   public myModal: ModalDirective;
@@ -25,6 +27,7 @@ export class ProjectDetailDefaultComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private categoryService: CategoryService,
+    private projectService: ProjectService,
     private breadcrumbService: AppBreadcrumbService
   ) {}
   ngOnInit(): void {
@@ -33,6 +36,7 @@ export class ProjectDetailDefaultComponent implements OnInit {
       categoryDes: new FormControl(null, [])
     });
     this.getAllCategory();
+    this.getAllUsers();
   }
   getAllCategory() {
     this.route.params.subscribe(params => {
@@ -77,5 +81,17 @@ export class ProjectDetailDefaultComponent implements OnInit {
     this.breadcrumbService.breadCrumbsSubject.next(
       Object.assign([], breadcrumbs)
     );
+  }
+
+  getAllUsers() {
+    this.route.params.subscribe(params => {
+      this.projectId = params["projectId"];
+      this.initBreadCrumb();
+      this.projectService
+        .getUsers(this.projectId)
+        .subscribe((response: any) => {
+          this.users = response;
+        });
+    });
   }
 }

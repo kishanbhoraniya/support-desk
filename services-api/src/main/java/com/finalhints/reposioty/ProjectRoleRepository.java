@@ -1,5 +1,8 @@
 package com.finalhints.reposioty;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +16,9 @@ public interface ProjectRoleRepository
 
 	@Query("select pr.user from ProjectRole pr where pr.project = ?1 AND pr.role.name='admin'")
 	User getAdmin(Project project);
+
+	List<ProjectRole> findByProject(Project project);
+
+	Optional<ProjectRole> findByProjectAndUser(Project project, User user);
 
 }
