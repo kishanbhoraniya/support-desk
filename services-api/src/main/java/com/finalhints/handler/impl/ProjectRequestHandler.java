@@ -66,7 +66,6 @@ public class ProjectRequestHandler implements IProjectRequestHandler {
 		while (iterator.hasNext()) {
 			Project project = iterator.next();
 			User admin = projectRoleRepository.getAdmin(project);
-
 			ProjectRes projectRes = ProjectConverter.ENTITY_TO_RES.apply(project);
 			projectRes.setAdminName(admin.getFirstName() + " " + admin.getLastName());
 			projectRes.setAdminUserId(admin.getId());

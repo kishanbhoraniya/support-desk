@@ -11,7 +11,7 @@ import com.finalhints.entity.User;
 public interface ProjectRoleRepository
 		extends org.springframework.data.repository.CrudRepository<ProjectRole, Integer> {
 
-	@Query("select pr.user from ProjectRole pr where pr.project = ?1 AND pr.role='admin'")
+	@Query("select pr.user from ProjectRole pr where pr.project = ?1 AND pr.role.name='admin'")
 	User getAdmin(Project project);
 
 }

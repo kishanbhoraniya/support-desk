@@ -2,6 +2,8 @@ package com.finalhints.config;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.finalhints.entity.Role;
@@ -20,10 +22,15 @@ public class DataLoader {
 
 	private RoleRepository roleRepository;
 
-	public DataLoader(UserRepository userRepository, StatusRepository statusRepository, RoleRepository roleRepository) {
+	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	public DataLoader(UserRepository userRepository, StatusRepository statusRepository, RoleRepository roleRepository,
+			PasswordEncoder passwordEncoder) {
 		this.userRepository = userRepository;
 		this.statusRepository = statusRepository;
 		this.roleRepository = roleRepository;
+		this.passwordEncoder = passwordEncoder;
 		createData();
 	}
 
@@ -73,7 +80,7 @@ public class DataLoader {
 		if (!user.isPresent()) {
 			User newUser = new User();
 			newUser.setEmail(email);
-			newUser.setPassword(password);
+			newUser.setPassword(passwordEncoder.encode(password));
 			newUser.setFirstName(fName);
 			newUser.setLastName(lName);
 			newUser.setNumber("");

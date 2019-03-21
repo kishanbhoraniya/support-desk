@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.finalhints.converter.UserConverter;
@@ -30,8 +31,12 @@ public class UserRequestHandler implements IUserRequestHandler {
 	@Autowired
 	RoleRepository roleRepository;
 
+	@Autowired
+	PasswordEncoder passwordEncoder;
+
 	@Override
 	public CreatedRes create(CreateUserRq createUserRequest) {
+		createUserRequest.setPassword(passwordEncoder.encode(createUserRequest.getPassword()));
 		User user = UserConverter.CREATE_TO_ENTITY.apply(createUserRequest);
 		Optional<Role> role = roleRepository.findById(1);
 		user.setRole(role.get());
@@ -72,9 +77,13 @@ public class UserRequestHandler implements IUserRequestHandler {
 
 	@Override
 	public UserRes login(LoginReq loginReq) {
-		Optional<User> user = userRepository.getUserByEmailAndPassword(loginReq.getEmail(), loginReq.getPassword());
+		Optional<User> user = userRepository.findByEmail(loginReq.getEmail());
 		if (user.isPresent()) {
-			return UserConverter.ENTITY_TO_RES.apply(user.get());
+			if (passwordEncoder.matches(loginReq.getPassword(), user.get().getPassword())) {
+				return UserConverter.ENTITY_TO_RES.apply(user.get());
+			} else {
+				throw new RuntimeException("Invalid Password");
+			}
 		} else {
 			throw new RuntimeException("User not found");
 		}
