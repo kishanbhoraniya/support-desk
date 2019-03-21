@@ -21,8 +21,6 @@ public final class ProjectConverter {
 		res.setId(projectEntity.getId());
 		res.setName(projectEntity.getName());
 		res.setDescription(projectEntity.getDescription());
-		res.setAdminUserId(projectEntity.getAdmin().getId());
-		res.setAdminName(projectEntity.getAdmin().getFirstName() + " " + projectEntity.getAdmin().getLastName());
 		res.setCreated(projectEntity.getCreated());
 		res.setUpdated(projectEntity.getUpdated());
 		return res;

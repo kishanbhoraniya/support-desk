@@ -42,14 +42,14 @@ public class User {
 	private String number;
 
 	@Column(name = "active")
-	private byte active;
+	private boolean active;
 
 	@OneToOne
 	@JoinColumn(name = "role")
 	private Role role;
 
-	@OneToMany(mappedBy = "admin")
-	private List<Project> adminProjects;
+	@OneToMany(mappedBy = "user")
+	private List<ProjectRole> projectRoles;
 
 	@OneToMany(mappedBy = "createdBy")
 	private List<Project> createdProject;
@@ -110,11 +110,11 @@ public class User {
 		this.number = number;
 	}
 
-	public byte getActive() {
+	public boolean isActive() {
 		return active;
 	}
 
-	public void setActive(byte active) {
+	public void setActive(boolean active) {
 		this.active = active;
 	}
 
@@ -124,14 +124,6 @@ public class User {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public List<Project> getAdminProjects() {
-		return adminProjects;
-	}
-
-	public void setAdminProjects(List<Project> adminProjects) {
-		this.adminProjects = adminProjects;
 	}
 
 	public List<Project> getCreatedProject() {
@@ -156,6 +148,14 @@ public class User {
 
 	public void setUpdated(Date updated) {
 		this.updated = updated;
+	}
+
+	public List<ProjectRole> getProjectRoles() {
+		return projectRoles;
+	}
+
+	public void setProjectRoles(List<ProjectRole> projectRoles) {
+		this.projectRoles = projectRoles;
 	}
 
 	@PrePersist

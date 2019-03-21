@@ -33,10 +33,6 @@ public class Project {
 	private String description;
 
 	@ManyToOne(targetEntity = User.class)
-	@JoinColumn(name = "admin_user_id")
-	User admin;
-
-	@ManyToOne(targetEntity = User.class)
 	@JoinColumn(name = "created_by")
 	User createdBy;
 
@@ -50,6 +46,9 @@ public class Project {
 	@Column(name = "updated", columnDefinition = "DATETIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updated;
+
+	@OneToMany(mappedBy = "project")
+	private List<ProjectRole> projectRoles;
 
 	public int getId() {
 		return id;
@@ -73,14 +72,6 @@ public class Project {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public User getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(User admin) {
-		this.admin = admin;
 	}
 
 	public User getCreatedBy() {
@@ -113,6 +104,14 @@ public class Project {
 
 	public void setUpdated(Date updated) {
 		this.updated = updated;
+	}
+
+	public List<ProjectRole> getProjectRoles() {
+		return projectRoles;
+	}
+
+	public void setProjectRoles(List<ProjectRole> projectRoles) {
+		this.projectRoles = projectRoles;
 	}
 
 	@PrePersist

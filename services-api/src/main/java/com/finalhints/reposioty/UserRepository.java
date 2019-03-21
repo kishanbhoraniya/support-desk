@@ -14,4 +14,6 @@ public interface UserRepository extends org.springframework.data.repository.Crud
 	Optional<User> getUserByEmailAndPassword(String email, String password);
 
 	Optional<User> findByEmailAndPassword(String email, String password);
+
+	Optional<User> findByEmail(String email);
 }

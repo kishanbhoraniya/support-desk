@@ -23,7 +23,7 @@ public final class UserConverter {
 		res.setFirstName(userEntity.getFirstName());
 		res.setLastName(userEntity.getLastName());
 		res.setNumber(userEntity.getNumber());
-		res.setActive(userEntity.getActive() > 0);
+		res.setActive(userEntity.isActive());
 		res.setRole(userEntity.getRole().getName());
 		res.setEmail(userEntity.getEmail());
 		res.setCreated(userEntity.getCreated());
