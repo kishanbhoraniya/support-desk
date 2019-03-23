@@ -19,7 +19,7 @@
                 <th>Type</th>
                 <th>Assignee</th>
                 <th>Status</th>
-    
+                <th>Assign</th>
               </tr>
             </thead>
             <tbody>
@@ -41,6 +41,8 @@
                   <span class="badge badge-danger" *ngIf="ticket.status == 'Closed'">{{ticket.status}}</span>
                   <span class="badge badge-warning" *ngIf="ticket.status == 'In Progress'">{{ticket.status}}</span>
                 </td>
+                <td><button class="btn btn-primary" (click)="onAssign()"
+                  data-toggle="modal">Assign</button></td>
                 
               </tr>
             </tbody>

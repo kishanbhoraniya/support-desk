@@ -49,5 +49,9 @@ export const navItems: NavData[] = [
     name: 'Ticket',
     url: '/ticket',
     icon: 'icon-envelope'
+  },{
+    name: 'Manage Ticket',
+    url: '/ticketmanage',
+    icon: 'icon-envelope'
   }
 ];

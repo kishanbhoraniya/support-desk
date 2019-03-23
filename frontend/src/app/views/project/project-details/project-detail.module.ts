@@ -6,6 +6,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ProjectDetailDefaultComponent } from './default/project-detail-default.component';
 import { ProjectDetailComponent } from './project-detail.component';
 import { ProjectDetailRoutingModule } from './project-detail-routing.module';
+import { DropdownModule } from 'primeng/dropdown';
 import {
   CommonModule,
   LocationStrategy,
@@ -13,6 +14,7 @@ import {
 } from "@angular/common";
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { from } from 'rxjs';
+
 @NgModule({
   imports: [
     FormsModule,
@@ -21,6 +23,7 @@ import { from } from 'rxjs';
     ProjectDetailRoutingModule,
     ChartsModule,
     BsDropdownModule,
+    DropdownModule,
     ButtonsModule.forRoot(),
     ModalModule.forRoot()
   ],

@@ -47,7 +47,6 @@ export class CreateTicketComponent implements OnInit {
     this.createTicketForm = new FormGroup({
       projectName: new FormControl(null, [Validators.required]),
       categoryName: new FormControl(null, [Validators.required])
-      
     });
     this.forprojects = [];
     this.getAllProjects();

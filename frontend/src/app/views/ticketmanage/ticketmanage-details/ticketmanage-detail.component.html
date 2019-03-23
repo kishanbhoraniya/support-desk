@@ -1,0 +1,79 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="d-inline">Ticket : {{ ticketdes?.id }}</h4>
+        </div>
+        <div class="card-body">
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <td>
+                  <b>Project</b>
+                </td>
+                <td>
+                  {{ticketdes?.project}}
+                </td>
+                <td>
+                  <b>Type</b>
+                </td>
+                <td>
+                  {{ticketdes?.category}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>Assigned To</b>
+                </td>
+                <td>
+                  {{ticketdes?.assignee}}
+                </td>
+                <td>
+                  <b>Status</b>
+                </td>
+                <td>
+                  {{ticketdes?.status}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <b>Created At</b>
+                </td>
+                <td>
+                  {{ticketdes?.created}}
+                </td>
+                <td>
+                  <b>Last Updated At</b>
+                </td>
+                <td>
+                  {{ticketdes?.updated}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-responsive-sm table-hover table-outline mb-0">
+            <thead class="thead-light">
+              <tr>
+                <th>Name</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let field of fields">
+                <td>
+                  {{field.name}}
+                </td>
+                <td>
+                  {{field.value}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
+</div>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.finalhints.handler.ITicketRequestHandler;
 import com.finalhints.request.ticket.CreateTicketRq;
+import com.finalhints.requests.AssignTicketRq;
 import com.finalhints.response.CreatedRes;
 import com.finalhints.response.TicketDesRes;
 import com.finalhints.response.TicketRes;
@@ -52,5 +53,12 @@ public class TicketController {
 	@GetMapping("/{ticketId}")
 	public TicketDesRes getTicket(@PathVariable(value = "ticketId", required = true) int ticketId) {
 		return ticketRequestHandler.get(ticketId);
+	}
+	
+	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
+	@PostMapping("/assign")
+	public TicketDesRes assignTicket(@RequestBody @Validated AssignTicketRq assignTicketRequest) {
+		return ticketRequestHandler.setAssignee(assignTicketRequest);
 	}
 }

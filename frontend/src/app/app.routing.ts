@@ -102,6 +102,10 @@ export const routes: Routes = [
       {
         path: 'ticket',
         loadChildren: './views/ticket/ticket.module#TicketModule'
+      },
+      {
+        path: 'ticketmanage',
+        loadChildren: './views/ticketmanage/ticketmanage.module#TicketManageModule'
       }
     ]
   },

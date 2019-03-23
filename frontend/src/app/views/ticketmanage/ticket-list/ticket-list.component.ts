@@ -22,7 +22,7 @@ export class TicketListComponent implements OnInit {
   public myModal: ModalDirective;
 
   TicketList = [];
-  cities2: SelectItem[];
+
   
   userId = JSON.parse(sessionStorage.getItem("user")).id
   constructor(

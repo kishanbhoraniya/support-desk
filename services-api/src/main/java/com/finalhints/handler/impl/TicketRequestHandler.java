@@ -25,6 +25,7 @@ import com.finalhints.reposioty.TicketDesRepository;
 import com.finalhints.reposioty.TicketRepository;
 import com.finalhints.reposioty.UserRepository;
 import com.finalhints.request.ticket.CreateTicketRq;
+import com.finalhints.requests.AssignTicketRq;
 import com.finalhints.response.CreatedRes;
 import com.finalhints.response.TicketDesRes;
 import com.finalhints.response.TicketRes;
@@ -138,5 +139,14 @@ public class TicketRequestHandler implements ITicketRequestHandler {
 		ticketDesRes.setFields(fieldsres);
 		return ticketDesRes;
 	}
+
+	@Override
+	public TicketDesRes setAssignee(AssignTicketRq assignTicketRequest) {
+		Ticket ticket = ticketRepository.findById(assignTicketRequest.getTicketId()).get();
+		ticket.setAssigneeUser(userRepository.findById(assignTicketRequest.getUserId()).get());
+		ticketRepository.save(ticket);
+		return get(assignTicketRequest.getTicketId());
+	}
+	
 
 }

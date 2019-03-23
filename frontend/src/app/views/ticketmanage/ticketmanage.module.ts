@@ -3,25 +3,26 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { ProjectComponent } from './project.component';
-import { ProjectListComponent } from './project-list/project-list.component';
-import { ProjectRoutingModule } from './project-routing.module';
+import { TicketManageComponent } from './ticketmanage.component';
+import { TicketListComponent } from './ticket-list/ticket-list.component';
+import { TicketManageRoutingModule } from './ticketmanage-routing.module';
 import { CommonModule } from "@angular/common";
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { DropdownModule } from 'primeng/dropdown';
+import { CreateTicketComponent } from './create-ticket/create-ticket.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ProjectRoutingModule,
+    TicketManageRoutingModule,
     ChartsModule,
     BsDropdownModule,
-    DropdownModule,
     ButtonsModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    DropdownModule
   ],
-  declarations: [ ProjectComponent,ProjectListComponent]
+  declarations: [ TicketManageComponent,TicketListComponent,CreateTicketComponent]
 })
-export class ProjectModule { }
+export class TicketManageModule { }

@@ -60,7 +60,9 @@ public class ProjectController {
 	@ResponseStatus(HttpStatus.OK)
 	@PostMapping("{projectId}/user")
 	public OperationCompletionRes addUserToProject(@PathVariable(value = "projectId") int projectId,
-			CreateProjectRoleReq addUserToProjectReq) {
+			@RequestBody CreateProjectRoleReq addUserToProjectReq) {
+			System.out.println(addUserToProjectReq.getEmail());
+			System.out.println(addUserToProjectReq.getRole());
 		return projectRequestHandler.addUserToProject(projectId, addUserToProjectReq);
 	}
 

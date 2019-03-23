@@ -16,6 +16,7 @@ import { ProjectService } from "./services/project.services";
 import { CategoryService } from "./services/category.services";
 import { FieldService } from "./services/field.services";
 import { TicketService } from "./services/ticket.services";
+import { RoleService } from "./services/role.services";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -33,6 +34,7 @@ import { LoginComponent } from "./views/login/login.component";
 import { RegisterComponent } from "./views/register/register.component";
 import { AppBreadcrumbModule } from "./views/breadcrumb/breadcrumb.module";
 import { ToastModule } from "primeng/toast";
+
 
 const APP_CONTAINERS = [DefaultLayoutComponent];
 
@@ -91,7 +93,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     ProjectService,
     CategoryService,
     FieldService,
-    TicketService
+    TicketService,
+    RoleService
   ],
   bootstrap: [AppComponent]
 })
