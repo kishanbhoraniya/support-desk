@@ -3,6 +3,8 @@ package com.finalhints.response;
 import java.util.Date;
 import java.util.List;
 
+import com.finalhints.entity.TicketReply;
+
 public class TicketDesRes {
 	private int id;
 	private Date created;
@@ -13,6 +15,16 @@ public class TicketDesRes {
 	private String createdBy;
 	private String Status;
 	List<Fields> fields;
+	List<TicketReplyRes> reply;
+	
+	
+	public List<TicketReplyRes> getReply() {
+		return reply;
+	}
+
+	public void setReply(List<TicketReplyRes> reply) {
+		this.reply = reply;
+	}
 
 	public int getId() {
 		return id;
@@ -134,5 +146,22 @@ public class TicketDesRes {
 	public void setProject(String project) {
 		this.project = project;
 	}
-
+	
+	public class TicketReplyRes {
+		private int id;
+		private String name;
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		
+	}
 }

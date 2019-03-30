@@ -33,6 +33,9 @@ public class Category {
 	Project project;
 
 	@OneToMany(mappedBy = "category")
+	private List<Ticket> tickets;
+
+	@OneToMany(mappedBy = "category")
 	private List<Field> categoryFields;
 
 	public List<Field> getCategoryFields() {
@@ -73,6 +76,14 @@ public class Category {
 
 	public void setProject(Project project) {
 		this.project = project;
+	}
+
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
 	}
 
 }

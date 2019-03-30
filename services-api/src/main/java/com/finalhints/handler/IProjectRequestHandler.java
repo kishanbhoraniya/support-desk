@@ -13,7 +13,7 @@ public interface IProjectRequestHandler {
 
 	ProjectRes get(int id);
 
-	Iterable<ProjectRes> getAll();
+	Iterable<ProjectRes> getAll(Integer userId);
 
 	Iterable<UserRes> getAllUsers(int projectId);
 

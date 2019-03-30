@@ -7,6 +7,7 @@ import {
 } from "@angular/common";
 import { AuthGuard } from "./shared/auth-guard.service";
 import { LoginGuard } from "./shared/login-guard.service";
+import { RoleGuard } from "./shared/role-guard.service";
 import { AuthService } from "./shared/auth.service";
 import { HttpClientModule } from "@angular/common/http";
 import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
@@ -16,6 +17,7 @@ import { ProjectService } from "./services/project.services";
 import { CategoryService } from "./services/category.services";
 import { FieldService } from "./services/field.services";
 import { TicketService } from "./services/ticket.services";
+import { StatusService } from "./services/status.services";
 import { RoleService } from "./services/role.services";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
@@ -28,8 +30,6 @@ import { AppComponent } from "./app.component";
 // Import containers
 import { DefaultLayoutComponent } from "./containers";
 
-import { P404Component } from "./views/error/404.component";
-import { P500Component } from "./views/error/500.component";
 import { LoginComponent } from "./views/login/login.component";
 import { RegisterComponent } from "./views/register/register.component";
 import { AppBreadcrumbModule } from "./views/breadcrumb/breadcrumb.module";
@@ -51,7 +51,6 @@ import { AppRoutingModule } from "./app.routing";
 // Import 3rd party components
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { TabsModule } from "ngx-bootstrap/tabs";
-import { ChartsModule } from "ng2-charts/ng2-charts";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
@@ -70,15 +69,12 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule,
     BrowserAnimationsModule,
     ToastModule
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
-    P404Component,
-    P500Component,
     LoginComponent,
     RegisterComponent
   ],
@@ -89,11 +85,13 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     },
     AuthGuard,
     LoginGuard,
+    RoleGuard,
     AuthService,
     ProjectService,
     CategoryService,
     FieldService,
     TicketService,
+    StatusService,
     RoleService
   ],
   bootstrap: [AppComponent]

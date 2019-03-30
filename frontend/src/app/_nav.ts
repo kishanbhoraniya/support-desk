@@ -29,29 +29,3 @@ export interface NavData {
   wrapper?: NavWrapper;
 }
 
-export const navItems: NavData[] = [
-  {
-    name: 'Dashboard',
-    url: '/dashboard',
-    icon: 'icon-speedometer',
-  },
-  {
-    name: 'Projects',
-    url: '/project',
-    icon: 'icon-puzzle'
-  },
-  {
-    name: 'Users',
-    url: '/user',
-    icon: 'icon-people'
-  },
-  {
-    name: 'Ticket',
-    url: '/ticket',
-    icon: 'icon-envelope'
-  },{
-    name: 'Manage Ticket',
-    url: '/ticketmanage',
-    icon: 'icon-envelope'
-  }
-];

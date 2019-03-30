@@ -4,6 +4,8 @@
       <div class="card">
         <div class="card-header">
           <h4 class="d-inline">Ticket : {{ ticketdes?.id }}</h4>
+            <button class="btn btn-primary" style="float: right" (click)="setReply.show()" data-toggle="modal">Reply</button>
+            <button class="btn btn-primary" style="float:right;margin-right: 13px" (click)="showSetStatusPop()" data-toggle="modal">Status</button>
         </div>
         <div class="card-body">
           <table class="table table-borderless">
@@ -49,6 +51,15 @@
                 <td>
                   {{ticketdes?.updated}}
                 </td>
+                
+              </tr>
+              <tr>
+                <td>
+                  <b>Created By</b>
+                </td>
+                <td>
+                  {{ticketdes?.createdBy}}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -77,3 +88,93 @@
   </div>
   <!--/.row-->
 </div>
+
+<div *ngIf="reply.length!=0" class="animated fadeIn">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="d-inline">Solution</h4>
+              
+          </div>
+          <div class="card-body">
+            <table class="table table-borderless">
+              <tbody>
+                <tr *ngFor="let i of ticketdes?.reply ">
+                  <td>
+                    {{i.name}}
+                  </td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!--/.col-->
+    </div>
+    <!--/.row-->
+  </div>
+
+
+<div bsModal #setReply="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Ticket Reply</h4>
+        <button type="button" class="close" (click)="setReply.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="setReplyForm" (ngSubmit)="submit()">
+          <div class="row">
+              <div class="col-sm-12">
+              <div class="form-group">
+               <textarea class="form-control" formControlName="setticketreply" id="setticketreply"></textarea>
+            </div>
+            </div>
+          </div>
+          <!--/.row-->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="setReply.hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="setTicketReply();">Reply</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div bsModal #setStatus="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Ticket Status</h4>
+        <button type="button" class="close" (click)="setStatus.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="setStatusForm" (ngSubmit)="submit()">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="statusName">Select Status</label><br>
+                <p-dropdown [options]="forstatus" formControlName="statusName" id="statusName"></p-dropdown>
+              </div>
+            </div>
+          </div>
+          <!--/.row-->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="setStatus.hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="setTicketStatus();">Update</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

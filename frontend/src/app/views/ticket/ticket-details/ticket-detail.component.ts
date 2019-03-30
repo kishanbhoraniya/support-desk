@@ -19,6 +19,7 @@ export class TicketDetailComponent implements OnInit {
   createFieldForm: FormGroup;
   ticketId;
   fields = [];
+  reply=[];
   ticketdes;
 
 
@@ -40,6 +41,7 @@ export class TicketDetailComponent implements OnInit {
       this.initBreadCrumb();
       this.ticketService.getTicketDes(this.ticketId).subscribe((response: any) => {
           this.fields = response.fields;
+          this.reply=response.reply;
           this.ticketdes = response;
         });
     });

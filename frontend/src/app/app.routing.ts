@@ -9,10 +9,9 @@ import { DefaultLayoutComponent } from './containers';
 import { LoginGuard } from './shared/login-guard.service';
 import { AuthGuard } from './shared/auth-guard.service';
 
-import { P404Component } from './views/error/404.component';
-import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { RoleGuard } from './shared/role-guard.service';
 
 export const routes: Routes = [
   {
@@ -20,20 +19,6 @@ export const routes: Routes = [
     redirectTo: 'dashboard',
     pathMatch: 'full',
     canActivate: [AuthGuard]
-  },
-  {
-    path: '404',
-    component: P404Component,
-    data: {
-      title: 'Page 404'
-    }
-  },
-  {
-    path: '500',
-    component: P500Component,
-    data: {
-      title: 'Page 500'
-    }
   },
   {
     path: 'login',
@@ -60,60 +45,48 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: 'base',
-        loadChildren: './views/base/base.module#BaseModule'
-      },
-      {
-        path: 'buttons',
-        loadChildren: './views/buttons/buttons.module#ButtonsModule'
-      },
-      {
-        path: 'charts',
-        loadChildren: './views/chartjs/chartjs.module#ChartJSModule'
-      },
-      {
+        canActivate: [RoleGuard],
+        data: {
+          "roles": ["admin", "manager"]
+        },
         path: 'dashboard',
         loadChildren: './views/dashboard/dashboard.module#DashboardModule'
       },
       {
-        path: 'icons',
-        loadChildren: './views/icons/icons.module#IconsModule'
-      },
-      {
-        path: 'notifications',
-        loadChildren: './views/notifications/notifications.module#NotificationsModule'
-      },
-      {
-        path: 'theme',
-        loadChildren: './views/theme/theme.module#ThemeModule'
-      },
-      {
-        path: 'widgets',
-        loadChildren: './views/widgets/widgets.module#WidgetsModule'
-      },
-      {
         path: 'project',
+        canActivate: [RoleGuard],
+        data: {
+          "roles": ["admin", "manager"]
+        },
         loadChildren: './views/project/project.module#ProjectModule'
       },
       {
         path: 'user',
+        canActivate: [RoleGuard],
+        data: {
+          "roles": ["admin"]
+        },
         loadChildren: './views/users/user.module#UserModule'
       },
       {
         path: 'ticket',
+        canActivate: [RoleGuard],
         loadChildren: './views/ticket/ticket.module#TicketModule'
       },
       {
         path: 'ticketmanage',
+        canActivate: [RoleGuard],
+        data: {
+          "roles": ["admin", "manager", "agent"]
+        },
         loadChildren: './views/ticketmanage/ticketmanage.module#TicketManageModule'
       }
     ]
-  },
-  { path: '**', component: P404Component }
+  }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

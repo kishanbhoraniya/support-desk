@@ -64,16 +64,29 @@ public class ProjectRequestHandler implements IProjectRequestHandler {
 	}
 
 	@Override
-	public Iterable<ProjectRes> getAll() {
-		Iterable<Project> projectEntities = projectRepository.findAll();
+	public Iterable<ProjectRes> getAll(Integer userId) {
+		Iterable<Project> projectEntities = new ArrayList<>();
+		if (userId != null) {
+			User currentUser = userRepository.findById(userId).get();
+			if (currentUser.getRole().getName().equalsIgnoreCase("admin")) {
+				projectEntities = projectRepository.findAll();
+			} else {
+				projectEntities = projectRepository.findProjectForUser(currentUser);
+			}
+		} else {
+			projectEntities = projectRepository.findAll();
+		}
 		List<ProjectRes> res = new ArrayList<>();
 		Iterator<Project> iterator = projectEntities.iterator();
 		while (iterator.hasNext()) {
 			Project project = iterator.next();
-			User admin = projectRoleRepository.getAdmin(project);
+			List<User> admins = projectRoleRepository.getAdmins(project);
 			ProjectRes projectRes = ProjectConverter.ENTITY_TO_RES.apply(project);
-			projectRes.setAdminName(admin.getFirstName() + " " + admin.getLastName());
-			projectRes.setAdminUserId(admin.getId());
+			if (!admins.isEmpty()) {
+				User admin = admins.get(0);
+				projectRes.setAdminName(admin.getFirstName() + " " + admin.getLastName());
+				projectRes.setAdminUserId(admin.getId());
+			}
 			res.add(projectRes);
 		}
 		return res;

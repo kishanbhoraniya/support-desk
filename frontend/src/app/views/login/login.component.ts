@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private messageService: MessageService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -40,7 +40,13 @@ export class LoginComponent implements OnInit {
         });
         sessionStorage.setItem("user", JSON.stringify(response));
         this.authService.loggedIn = true;
-        this.router.navigate(["/dashboard"]);
+        if (this.authService.hasRole('admin') || this.authService.hasRole('manager')) {
+          this.router.navigate(["/dashboard"]);
+        } else if (this.authService.hasRole('agent')) {
+          this.router.navigate(["/dashboard"]);
+        } else {
+          this.router.navigate(["/ticket"]);
+        }
       },
       error => {
         this.messageService.add({

@@ -5,7 +5,8 @@ import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { ButtonsModule } from "ngx-bootstrap/buttons";
 import { CommonModule } from "@angular/common";
 import { ModalModule } from "ngx-bootstrap/modal";
-import { TicketManageDetailComponent } from "./ticketmanage-detail.component"
+import { TicketManageDetailComponent } from "./ticketmanage-detail.component";
+import { DropdownModule } from 'primeng/dropdown';
 import { TicketManageDetailRoutingModule } from "./ticketmanage-detail-routing.module";
 import { InputSwitchModule } from "primeng/inputswitch";
 
@@ -19,7 +20,8 @@ import { InputSwitchModule } from "primeng/inputswitch";
     BsDropdownModule,
     ButtonsModule.forRoot(),
     ModalModule.forRoot(),
-    InputSwitchModule
+    InputSwitchModule,
+    DropdownModule
   ],
   declarations: [TicketManageDetailComponent]
 })

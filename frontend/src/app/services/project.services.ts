@@ -1,12 +1,21 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { environment } from "../../environments/environment.prod";
 
 @Injectable()
 export class ProjectService {
-  constructor(private http: HttpClient) {}
-  getProjects() {
+  constructor(private http: HttpClient) { }
+
+  getAllProjects() {
     return this.http.get(environment.baseURL + "/project");
+  }
+
+  getProjects(userId: any) {
+    let params: HttpParams = new HttpParams();
+    if (userId) {
+      params = params.append("currentUser", userId);
+    }
+    return this.http.get(environment.baseURL + "/project", { params: params });
   }
 
   createProject(project) {

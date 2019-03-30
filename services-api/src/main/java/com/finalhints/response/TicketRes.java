@@ -11,6 +11,16 @@ public class TicketRes {
 	private String project;
 	private String createdBy;
 	private String status;
+	private int projectId;
+	
+	
+	public int getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
+	}
 
 	public int getId() {
 		return id;

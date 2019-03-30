@@ -9,12 +9,11 @@ import com.finalhints.entity.Ticket;
 import com.finalhints.entity.User;
 
 @Repository
-public interface TicketRepository extends org.springframework.data.repository.CrudRepository<Ticket, Integer> {
+public interface TicketRepository
+		extends org.springframework.data.repository.CrudRepository<Ticket, Integer>, TicketCustomRepository {
 	@Query("select t from Ticket t where t.createdByUser = ?1")
 	Iterable<Ticket> getTicketByUser(User user);
 
 	@Query("select t from Ticket t where t.createdByUser = ?1")
 	Iterable<Ticket> getTicketByUser(Optional<User> user);
-
-	Iterable<Ticket> getTickets();
 }

@@ -16,28 +16,33 @@ import {
 })
 export class ProjectListComponent implements OnInit {
   createProjectForm: FormGroup;
+  user;
+  userrole;
 
   @ViewChild("myModal")
   public myModal: ModalDirective;
 
   projectList = [];
   constructor(
+
     private projectService: ProjectService,
     private authService: AuthService,
     private breadcrumbService: AppBreadcrumbService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initBreadCrumb();
+    this.user = this.authService.getUser();
     this.createProjectForm = new FormGroup({
       projectName: new FormControl(null, [Validators.required]),
       projectDes: new FormControl(null, [])
     });
-    this.getAllProjects();
+    this.userrole = this.authService.getUser().role;
+    this.getAllProjects(this.user.id);
   }
 
-  getAllProjects() {
-    this.projectService.getProjects().subscribe((response: any) => {
+  getAllProjects(userId) {
+    this.projectService.getProjects(userId).subscribe((response: any) => {
       this.projectList = response;
     });
   }
@@ -46,12 +51,12 @@ export class ProjectListComponent implements OnInit {
     const project = {
       projectName: this.createProjectForm.get("projectName").value.trim(),
       projectDesc: this.createProjectForm.get("projectDes").value.trim(),
-      adminUserId: JSON.parse(sessionStorage.getItem("user")).id
+      adminUserId: this.authService.getUser().id
     };
     this.projectService.createProject(project).subscribe((response: any) => {
       this.myModal.hide();
       this.createProjectForm.reset();
-      this.getAllProjects();
+      this.getAllProjects(this.user.id);
     });
   }
 

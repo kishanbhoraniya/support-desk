@@ -19,6 +19,7 @@ public final class TicketConverter {
 		res.setId(ticketEntity.getId());
 		res.setCategory(ticketEntity.getCategory().getName());
 		res.setProject(ticketEntity.getCategory().getProject().getName());
+		res.setProjectId(ticketEntity.getCategory().getProject().getId());
 		res.setStatus(ticketEntity.getStatus().getName());
 		res.setCreatedBy(
 				ticketEntity.getCreatedByUser().getFirstName() + " " + ticketEntity.getCreatedByUser().getLastName());

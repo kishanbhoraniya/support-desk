@@ -1,6 +1,7 @@
 package com.finalhints.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -33,21 +35,32 @@ public class Ticket {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updated;
 
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Status.class)
+	@ManyToOne(targetEntity = Status.class)
 	@JoinColumn(name = "status")
 	Status status;
 
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+	@ManyToOne(targetEntity = User.class)
 	@JoinColumn(name = "assignee")
 	User assigneeUser;
 
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
+	@ManyToOne(targetEntity = User.class)
 	@JoinColumn(name = "created_by")
 	User createdByUser;
 
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Category.class)
-	@JoinColumn(name = "category")
+	@ManyToOne(targetEntity = Category.class)
+	@JoinColumn(name = "category_id")
 	Category category;
+	
+	@OneToMany(mappedBy = "ticket")
+	private List<TicketReply> ticketReply;
+
+	public List<TicketReply> getTicketReply() {
+		return ticketReply;
+	}
+
+	public void setTicketReply(List<TicketReply> ticketReply) {
+		this.ticketReply = ticketReply;
+	}
 
 	public Category getCategory() {
 		return category;

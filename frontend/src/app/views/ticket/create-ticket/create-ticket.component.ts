@@ -40,21 +40,21 @@ export class CreateTicketComponent implements OnInit {
     private categoryService: CategoryService,
     private breadcrumbService: AppBreadcrumbService,
     private fieldService: FieldService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initBreadCrumb();
     this.createTicketForm = new FormGroup({
       projectName: new FormControl(null, [Validators.required]),
       categoryName: new FormControl(null, [Validators.required])
-      
+
     });
     this.forprojects = [];
     this.getAllProjects();
   }
 
   getAllProjects() {
-    this.projectService.getProjects().subscribe((response: any) => {
+    this.projectService.getAllProjects().subscribe((response: any) => {
       this.projects = response;
       this.forprojects = [];
       for (var i = 0; i < this.projects.length; i++) {
@@ -148,7 +148,7 @@ export class CreateTicketComponent implements OnInit {
   submit() {
     var ticket = {
       categoryId: this.selectedCategory["id"],
-      userId: JSON.parse(sessionStorage.getItem("user")).id,
+      userId: this.authService.getUser().id,
       fieldMap: {}
     };
     this.fields.forEach(field => {

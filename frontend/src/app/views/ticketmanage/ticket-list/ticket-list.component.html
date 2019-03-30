@@ -4,8 +4,6 @@
       <div class="card">
         <div class="card-header">
           <h4 class="d-inline">Tickets</h4>
-          <button class="btn btn-primary" style="float: right" (click)="router.navigate(['ticket/createticket'])"
-            data-toggle="modal">Create Ticket</button>
         </div>
         <div class="card-body">
           <p *ngIf="!TicketList || TicketList==0" style="text-align: center;">
@@ -20,10 +18,11 @@
                 <th>Assignee</th>
                 <th>Status</th>
                 <th>Assign</th>
+                
               </tr>
             </thead>
             <tbody>
-              <tr [routerLink]="['./'+ticket.id]" *ngFor="let ticket of TicketList">
+              <tr *ngFor="let ticket of TicketList" [routerLink]="['./'+ticket.id]">
                 <td>
                   {{ticket.id}}
                 </td>
@@ -41,8 +40,9 @@
                   <span class="badge badge-danger" *ngIf="ticket.status == 'Closed'">{{ticket.status}}</span>
                   <span class="badge badge-warning" *ngIf="ticket.status == 'In Progress'">{{ticket.status}}</span>
                 </td>
-                <td><button class="btn btn-primary" (click)="onAssign()"
+                <td><button class="btn btn-primary" (click)="showAssignUserPopup($event,ticket.projectId,ticket.id);"
                   data-toggle="modal">Assign</button></td>
+               
                 
               </tr>
             </tbody>
@@ -54,4 +54,36 @@
   </div>
   <!--/.row-->
 </div>
+
+<div bsModal #assignUser="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Assign User</h4>
+        <button type="button" class="close" (click)="assignUser.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="assignUserForm" (ngSubmit)="submit()">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="userName">Select User</label><br>
+                <p-dropdown [options]="forusers" formControlName="userName" id="userName"></p-dropdown>
+              </div>
+            </div>
+          </div>
+          <!--/.row-->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="assignUser.hide()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="assignTicketToUser();">Assign</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 

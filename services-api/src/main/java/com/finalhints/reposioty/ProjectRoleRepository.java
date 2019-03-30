@@ -15,7 +15,7 @@ public interface ProjectRoleRepository
 		extends org.springframework.data.repository.CrudRepository<ProjectRole, Integer> {
 
 	@Query("select pr.user from ProjectRole pr where pr.project = ?1 AND pr.role.name='admin'")
-	User getAdmin(Project project);
+	List<User> getAdmins(Project project);
 
 	List<ProjectRole> findByProject(Project project);
 

@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.finalhints.converter.UserConverter;
+import com.finalhints.entity.ProjectRole;
 import com.finalhints.entity.Role;
 import com.finalhints.entity.User;
 import com.finalhints.handler.IUserRequestHandler;
@@ -38,8 +39,9 @@ public class UserRequestHandler implements IUserRequestHandler {
 	public CreatedRes create(CreateUserRq createUserRequest) {
 		createUserRequest.setPassword(passwordEncoder.encode(createUserRequest.getPassword()));
 		User user = UserConverter.CREATE_TO_ENTITY.apply(createUserRequest);
-		Optional<Role> role = roleRepository.findById(1);
+		Optional<Role> role = roleRepository.findById(4);
 		user.setRole(role.get());
+		user.setActive(true);
 		userRepository.save(user);
 		CreatedRes res = new CreatedRes(user.getId());
 		return res;
@@ -80,7 +82,17 @@ public class UserRequestHandler implements IUserRequestHandler {
 		Optional<User> user = userRepository.findByEmail(loginReq.getEmail());
 		if (user.isPresent()) {
 			if (passwordEncoder.matches(loginReq.getPassword(), user.get().getPassword())) {
-				return UserConverter.ENTITY_TO_RES.apply(user.get());
+				User userEntiry = user.get();
+				UserRes userRes = UserConverter.ENTITY_TO_RES.apply(userEntiry);
+				List<ProjectRole> projectRoles = userEntiry.getProjectRoles();
+				Role role = userEntiry.getRole();
+				for (ProjectRole projectRole : projectRoles) {
+					if (projectRole.getRole().getId() < role.getId()) {
+						role = projectRole.getRole();
+					}
+				}
+				userRes.setRole(role.getName());
+				return userRes;
 			} else {
 				throw new RuntimeException("Invalid Password");
 			}

@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-header">
           <h4 class="d-inline">Projects</h4>
-          <button class="btn btn-primary" style="float: right" (click)="myModal.show()" data-toggle="modal">Add Project</button>
+          <button *ngIf="userrole=='admin'" class="btn btn-primary" style="float: right" (click)="myModal.show()" data-toggle="modal">Add Project</button>
         </div>
         <div class="card-body">
           <p *ngIf="!projectList || projectList==0" style="text-align: center;">

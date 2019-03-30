@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,8 +46,8 @@ public class ProjectController {
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping
-	public Iterable<ProjectRes> getAllProjects() {
-		return projectRequestHandler.getAll();
+	public Iterable<ProjectRes> getAllProjects(@RequestParam(value = "currentUser", required = false) Integer userId) {
+		return projectRequestHandler.getAll(userId);
 	}
 
 	@ResponseBody
@@ -61,8 +62,8 @@ public class ProjectController {
 	@PostMapping("{projectId}/user")
 	public OperationCompletionRes addUserToProject(@PathVariable(value = "projectId") int projectId,
 			@RequestBody CreateProjectRoleReq addUserToProjectReq) {
-			System.out.println(addUserToProjectReq.getEmail());
-			System.out.println(addUserToProjectReq.getRole());
+		System.out.println(addUserToProjectReq.getEmail());
+		System.out.println(addUserToProjectReq.getRole());
 		return projectRequestHandler.addUserToProject(projectId, addUserToProjectReq);
 	}
 

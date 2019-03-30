@@ -10,7 +10,7 @@ import {
   Validators,
   ValidationErrors
 } from "@angular/forms";
-import {SelectItem} from 'primeng/api';
+import { SelectItem } from 'primeng/api';
 
 @Component({
   templateUrl: "ticket-list.component.html"
@@ -23,24 +23,24 @@ export class TicketListComponent implements OnInit {
 
   TicketList = [];
   cities2: SelectItem[];
-  
-  userId = JSON.parse(sessionStorage.getItem("user")).id
+  userId;
+
   constructor(
     private ticketService: TicketService,
     private authService: AuthService,
     private breadcrumbService: AppBreadcrumbService,
     private router: Router
-    
-  ) {}
+
+  ) { }
 
   ngOnInit(): void {
+    this.userId = this.authService.getUser().id;
     this.initBreadCrumb();
     this.getAllTickets();
   }
 
   getAllTickets() {
-
-    this.ticketService.getTicketsById(this.userId).subscribe((response: any) => {
+    this.ticketService.getTicketsByCreatedUserId(this.userId).subscribe((response: any) => {
       this.TicketList = response;
     });
   }

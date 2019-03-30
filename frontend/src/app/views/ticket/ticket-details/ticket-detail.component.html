@@ -77,3 +77,30 @@
   </div>
   <!--/.row-->
 </div>
+
+<div *ngIf="reply.length!=0" class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="d-inline">Solution</h4>
+            
+        </div>
+        <div class="card-body">
+          <table class="table table-borderless">
+            <tbody>
+              <tr *ngFor="let i of ticketdes?.reply ">
+                <td>
+                  {{i.name}}
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
+</div>
